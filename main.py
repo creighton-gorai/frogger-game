@@ -27,10 +27,17 @@ while game_is_on:
     # Should car be created
     if random.randint(0, 5) == 1:
         cars.append(CarManager(random.randint(-250, 250)))
-    for movement in range(len(cars)):
-        cars[movement].move(difficulty)
+
+    # Move car
+    for car in range(len(cars)):
+        cars[car].move(difficulty)
+        if cars[car].distance(turtle) < 30:
+            game_is_on = False
+            level.game_over()
+
     # Check if player got to the other side of the screen
     if turtle.crossed_finish_line():
         difficulty += 1
         level.update_scoreboard()
-    # Check to see if the player was hit by a car
+
+screen.exitonclick()
