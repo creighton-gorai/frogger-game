@@ -23,3 +23,4 @@ class Player(Turtle):
     def crossed_finish_line(self):
         if self.ycor() > FINISH_LINE_Y:
             self.reset_position()
+            return True

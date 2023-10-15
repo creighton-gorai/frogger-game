@@ -12,17 +12,25 @@ screen.tracer(0)
 
 turtle = Player()
 cars = []
+level = Scoreboard()
+difficulty = 0
 
 screen.listen()
 screen.onkeypress(turtle.move, "Up")
+
 
 game_is_on = True
 while game_is_on:
     time.sleep(0.1)
     screen.update()
 
-    # Allow car to be created randomly
-
+    # Should car be created
+    if random.randint(0, 5) == 1:
+        cars.append(CarManager(random.randint(-250, 250)))
+    for movement in range(len(cars)):
+        cars[movement].move(difficulty)
     # Check if player got to the other side of the screen
-    turtle.crossed_finish_line()
+    if turtle.crossed_finish_line():
+        difficulty += 1
+        level.update_scoreboard()
     # Check to see if the player was hit by a car
